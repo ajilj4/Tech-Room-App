@@ -2,3 +2,10 @@
 <form method="GET" action="{% url 'home' %}">
     <input type="text" placeholder="search ..." name="q"/>
 </form>
+
+{% if request.user.is_authenticated %}
+<h5>Hello {{request.user}}</h5>
+    <a href="{% url 'loginpage'%}">Logout</a>
+{% else %}
+    <a href="{% url 'logoutpage'%}">Login</a>
+{% endif %}
