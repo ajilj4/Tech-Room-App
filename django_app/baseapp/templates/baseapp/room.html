@@ -1,7 +1,51 @@
 {% extends 'main.html' %}
 {% block content %}
-<h1>Room</h1>
 
-<h2>{{room.description}}</h2>
+<style>
+    .room-container{
+        display: flex;
+        width: 100%;
+
+    }
+    .left-room{
+flex: 1;
+
+    }
+    .right-room{
+        flex: 0.4;
+    }
+
+</style>
+
+<div class="room-container">
+    <div class="left-room">
+        <h1>{{room.name}}</h1>
+
+        <h2>{{room.description}}</h2>
+        
+        <h3>conversation</h3><hr>
+        {% for message in room_messages %}
+        <a href="{% url 'delete-message' message.id %}">Delete</a>
+        <small>@{{message.user}} {{message.created|timesince}} ago</small>
+        <p>{{message.body}}</p>
+        {% endfor %}
+
+        {% if request.user.is_authenticated %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="body" placeholder="msg..."/>
+        <input type="submit" value="send"/>
+    </form>
+    {% endif %}
+    </div>
+
+    <div class="right-room">
+        <h3>Participation </h3>
+        {% for user in participants %}
+        <h5>@{{user.username}}</h5>
+
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock content %}
