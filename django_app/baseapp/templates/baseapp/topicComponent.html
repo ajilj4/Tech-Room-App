@@ -1,0 +1,26 @@
+
+  <div class="card my-4 mx-2">
+    <div class="card-header text-center">
+        <h4 class="card-title">Topics</h4>
+    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between px-3">
+
+        <a href="{% url 'home'%}"><h6 class="card-title">All</h6></a>
+        <p>{{room_count}}</p>
+    </div>
+      <hr>
+      
+      {% for lang in topic %}
+      <div class="d-flex justify-content-between px-3">
+        <a href="{% url 'home'%}?q={{lang.name}}"><h6 class="card-title">{{lang|title}}</h6></a>
+        <p>3</p>
+    </div>
+    {% endfor %}
+
+    </div>
+    <div class="card-footer text-body-secondary">
+      show all ..
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+  </div>

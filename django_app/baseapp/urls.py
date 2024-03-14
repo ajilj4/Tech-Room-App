@@ -7,6 +7,7 @@ urlpatterns=[
     path('logoutpage/',views.logoutpage,name='logoutpage'),
     path('registerpage/',views.registerpage,name='registerpage'),
     path('',views.home,name='home'),
+    path('profile/<str:pk>',views.userprofile,name='profile'),
     path('room/<str:pk>',views.room,name='room'),
     path('create-room/',views.createRoom,name='create-room'),
     path('update-room/<str:pk>',views.updateRoom,name='update-room'),

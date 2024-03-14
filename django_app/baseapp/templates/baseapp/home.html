@@ -2,45 +2,26 @@
 
 {% block content %}
 
-<style>
-    .container{
-        display: flex;
-    }
-    .left{
-        flex: 0.5;
-    }
-    .right{
-        flex: 1;
-    }
-</style>
-
-<h1>Rooms</h1>
-<div class="container">
-    
-    <div class="left">
-        <h3>Topics</h3>
-        <li><a href="{% url 'home'%}">All</a></li>
-        {% for lang in topic %}
-            <li><a href="{% url 'home'%}?q={{lang.name}}">{{lang}}</a>{{q}}</li>
-        {% endfor %}
+<div class="container-fluid ">
+    <div class="row">
+      <div class="col">
+        <div class="left">
+            {% include 'baseapp/topicComponent.html' %}
+           
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="center">
+            {% include 'baseapp/roomComponent.html' %}
+        </div>
+      </div>
+      <div class="col">
+        <div class="right">
+            {% include 'baseapp/recentComponent.html' %}
+            
+        </div>
+      </div>
     </div>
-    <div class="right">
-        
-        <a href="{% url 'create-room' %}"><h4>CREATE ROOM</h4></a>
-        <p>Total room : {{room_count}}</p>
-        <br><hr>
-        
-        {% for i in room %}
-        {% if request.user == i.host %}
-            <a href="{% url 'update-room' i.id %}">Edit</a>
-            <a href="{% url 'delete-room' i.id %}">Delete</a>
-            {% endif %}
-            <span>@{{i.host.username}}</span>
-                <h4>{{i.id}}
-                    <a href="/room/{{i.id}}">{{i.name}}</a></h4><br><hr>
-        {% endfor %}
-    </div>
-</div>
-
+</div>  
 
 {% endblock content %}

@@ -60,14 +60,17 @@ def home(request):
         q = request.GET.get("q")
     else:
         q=''
+    # q= request.GET.get('q') if request.GET.get('q') != None else ""
     room = Room.objects.filter(
         Q(topic__name__icontains=q)|
         Q(name__icontains=q)|
         Q(description__icontains=q)
+
         )
     topic= Topic.objects.all()
+    recent_msg = Message.objects.filter(Q(room__topic__name__icontains=q)).order_by("-id")[:4]
     room_count = room.count()
-    context ={'room':room,'topic':topic,'q':q,'room_count':room_count}
+    context ={'room':room,'topic':topic,'q':q,'room_count':room_count,"recent_msg":recent_msg }
     return render(request,'baseapp/home.html',context)
 
 def room(request,pk):
@@ -85,6 +88,17 @@ def room(request,pk):
         return redirect('room',pk=room.id)
     
     return render(request,'baseapp/room.html',{'room':room,'room_messages':room_messages,'participants':participants})
+
+def userprofile(request,pk):
+    user = User.objects.get(id=pk)
+    topic = Topic.objects.all()
+    room = user.room_set.all()
+    recent_msg = user.message_set.all() 
+
+    context = {'user':user,'topic':topic,'room':room,'recent_msg':recent_msg}
+    return render(request,'baseapp/profile.html',context)
+
+
 
 @login_required(login_url='/loginpage')
 def createRoom(request):

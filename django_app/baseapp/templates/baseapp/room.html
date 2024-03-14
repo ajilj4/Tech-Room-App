@@ -1,51 +1,64 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<style>
-    .room-container{
-        display: flex;
-        width: 100%;
 
-    }
-    .left-room{
-flex: 1;
 
-    }
-    .right-room{
-        flex: 0.4;
-    }
 
-</style>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8" >
+        <div class="left">
+            <div class="card my-4" style="height: 85vh;">
+                <div class="card-header d-flex flex-row">
+                <a href="{{request.META.HTTP_REFERER}}">&#x2190</a>&nbsp;
+                <h6 >{{room.name}}</h6>
+            </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{room.name}}</h5>
+                  <p class="card-text">{{room.description}}</p>
+                </div>
 
-<div class="room-container">
-    <div class="left-room">
-        <h1>{{room.name}}</h1>
+                <div class="card mx-3 mt-5 mb-3 text-bg-dark" style="height: 50vh;position: relative; overflow: scroll;">
+ 
+                    <h3>conversation</h3><hr>
+                    {% for message in room_messages %}
+                    {% if request.user == message.user %}
+                    <a href="{% url 'delete-message' message.id %}">Delete</a>
+                    {% endif %}
+                    <small>@{{message.user}} {{message.created|timesince}} ago</small>
+                    <p>{{message.body}}</p>
+                    {% endfor %}
+            
+                    {% if request.user.is_authenticated %}
+                <form action="" method="POST" style="position: absolute;bottom: 0;right: 0;left: 0;">
+                    {% csrf_token %}
+                  
+        <input class="form-control " type="text" placeholder="Search" aria-label="Search" name="q" style="position: relative;">
+                    
+                    <input type="submit" value="send" style="position: absolute;top: 5px;right: 5px;"/>
+                </form>
+                {% endif %}
+                </div>
 
-        <h2>{{room.description}}</h2>
+              </div>
+            
+
+    
         
-        <h3>conversation</h3><hr>
-        {% for message in room_messages %}
-        <a href="{% url 'delete-message' message.id %}">Delete</a>
-        <small>@{{message.user}} {{message.created|timesince}} ago</small>
-        <p>{{message.body}}</p>
-        {% endfor %}
-
-        {% if request.user.is_authenticated %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="text" name="body" placeholder="msg..."/>
-        <input type="submit" value="send"/>
-    </form>
-    {% endif %}
-    </div>
-
-    <div class="right-room">
-        <h3>Participation </h3>
+           
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="center">
+            <h3>Participation </h3>
         {% for user in participants %}
         <h5>@{{user.username}}</h5>
 
         {% endfor %}
+        </div>
+      </div>
     </div>
 </div>
 
-{% endblock content %}
+
+{% endblock content %} 
