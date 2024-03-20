@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div style="height: 100vh;position: relative;">
+
+<div class="card" style="position: absolute;top: 40%;left: 50%;transform: translate(-50%,-50%);width:calc(30% + 200px);">
+<div class="card-header">
+  <a href="{% url 'home' %}" class="link-primary">
+    <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+  </svg></a>
+<h5 style="display: inline;" class="ms-3">Browse Topic</h5>
+</div>
+<form method="GET" class="p-4">
+<input class="form-control" type="text" name="q" placeholder="search input" aria-label="default input example">
+</form>
+<div class="card-body">
+    {% for lang in topic %}
+    <div >
+      <a href="{% url 'home'%}?q={{lang.name}}" class="text-dark text-decoration-none d-flex justify-content-between px-3 link-primary">
+        <h6 class="card-title ">{{lang|title}}</h6>
+      <p>{{lang.room_set.all.count}}</p></a>
+  </div>
+  {% endfor %}
+</div>
+</div>
+</div>
+
+
+{% endblock %}

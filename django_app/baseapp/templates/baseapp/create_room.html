@@ -2,10 +2,61 @@
 
 {% block content %}
 
+<div style="height: 100vh;position: relative;">
+    <div class="container-sm">
+    <div class="card " style="height: 520px;position: absolute;top: 43%;left: 50%;transform: translate(-50%,-50%);">
+        <h5 class="card-header">
+            <a href="{{request.META.HTTP_REFERER}}" class="pe-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg></a>
+          {% if page == 'create'%}
+          Create new room
+          {% else %}
+          Update room
+          {% endif %}
+        </h5>
+        <div class="card-body px-4 py-4">
+            <form method="POST" action="">
+                {% csrf_token %}
+               
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Room Title</label>
+                    {{form.name}}
+                  </div>
+                  <div class="mb-3">
+                    <label for="room_topic" class="form-label">Enter a Topic</label>
+                    <input required type="text" value="{{room.topic.name}}" class="form-control" name="topic" list="topic-list"  />
+                    <datalist id="topic-list">
+                        <section id="room_topic">
+                            {% for topics in topic %}
+                            <option >{{topics}}</option>
+                            {% endfor %}
+                    </section>
+                    </datalist>
+                   
+                </div>
+                
+                  <!-- <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Topic Name</label>
+                    {{form.topic}}
+                  </div> -->
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Room Description</label>
+                    {{form.description}}
+                    <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                  </div>
+            <div class="d-flex justify-content-end flex-row">
+                <a href="{{request.META.HTTP_REFERER}}" class="btn btn-danger me-4">Cancel</a>
+                <button type="submit" class="btn btn-success" >Submit</button>
+            </div>
+            </form>      
+          
+        </div>
+      </div>
+        
+    </div>
+</div>
+</div>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="submit"/>
-    </form>
 {% endblock content %}
