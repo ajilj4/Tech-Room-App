@@ -16,8 +16,8 @@
                 <small class="text-body-secondary">{{msg.created|timesince}}</small>
             </div>
             </div>
-            <p>{{msg.room}}</p>
-            <small>Reply</small>
+            <p style="font-size: medium; margin-bottom: -3px;" class="mt-2">{{msg.room}}</p>
+            <small>reply</small>
             <p style="font-size: smaller;" class="text-end text-bg-secondary px-4 py-2 mx-2 rounded-start-pill rounded-end-pill fw-lighter font-monospace" ><i>{{msg.body|truncatechars:70}}</i></p>
         <hr>
                 {% endfor %}

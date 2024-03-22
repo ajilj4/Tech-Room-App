@@ -2,31 +2,91 @@
 
 {% block content %}
 
-{% if page == "login" %}
-<div>
+<div style="height: 100vh;position: relative;">
+    {% if page == "login" %}
+    <div class="card" style="position: absolute;top: 40%;left: 50%;transform: translate(-50%,-50%);width:calc(20% + 200px);">
+    <div class="card-header">
+      <a href="{{request.META.HTTP_REFERER}}" class="link-primary">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+      </svg></a>
+    <h5 style="display: inline;" class="ms-3">Login</h5>
+    </div>
     
-    <form method="POST" action="">
-        {% csrf_token %}
-        <label>username:</label>
-        <input type="text" name="username" placeholder="Enter username"/>
-        <label>password:</label>
-        <input type="password" name="password" placeholder="Enter password"/>
-        <input type="submit" value="Login"/>
-    </form>
+    <div class="card-body p-4">
+      {% include 'message.html' %}
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{message.error}}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="text" class="form-control" name="username" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="exampleFormControlInput1" placeholder="Enter password">
+              </div>
+              <div class="d-flex justify-content-end mt-4">
+              <button type="submit" class="btn btn-success  px-4">Login</button>
+            </div>  
+        </form>
+    </div>    
+      <div class="card-footer">
 
-    <p>Create account </p>
-    <a href="{% url 'registerpage'%}">Signin</a>
+        <small>Create Account? </small>&nbsp;&nbsp;
+        <a href="{% url 'registerpage'%}" >Signin</a>
+     
+    </div>
+    </div>
     
+
 {% else %}
 
-    <form method="POST">
+<div class="card" style="position: absolute;top: 40%;left: 50%;transform: translate(-50%,-50%);width:calc(20% + 200px);">
+    <div class="card-header">
+      <a href="{{request.META.HTTP_REFERER}}" class="link-primary">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+      </svg></a>
+    <h5 style="display: inline;" class="ms-3">Register</h5>
+    </div>
+    
+    <div class="card-body p-4">
+      {% include 'message.html' %}
+        <form method="POST" action="">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{field.label}}</label>
+                <div class="col">
+                   {{field}}
+                </div>
+                <!-- <input type="text" class="form-control" name="username" id="exampleFormControlInput1" placeholder="name@example.com"> -->
+              </div>
+             {% endfor %}
+              <div class="d-flex justify-content-end mt-4">
+              <button type="submit" class="btn btn-secondary  px-4">SignUp</button>
+            </div>  
+        </form>
+    </div>    
+      <div class="card-footer">
+
+        <small>Already have Account ? </small>&nbsp;&nbsp;
+        <a href="{% url 'loginpage'%}">login</a>
+     
+    </div>
+    </div>
+    </div>
+
+    <!-- <form method="POST">
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="Register" />
     </form>
-    <p>have account </p>
-    <a href="{% url 'loginpage'%}">login</a>
-</div>
+    <p> </p> -->
+   
+
+
 
 {% endif %}
 

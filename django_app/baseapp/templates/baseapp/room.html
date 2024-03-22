@@ -8,19 +8,36 @@
       <div class="col-lg-8" >
         <div class="left">
             <div class="card my-4" style="height: 86.5vh;">
-                <div class="card-header ">
+                <div class="card-header d-flex flex-row justify-content-between">
+                  <div>
                 <a href="{{request.META.HTTP_REFERER}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                 </svg></a>&nbsp;
                 <h6 style="display: inline;" class="ms-3">STUDY ROOM</h6>
+              </div>
+              {% if request.user == room.host %}
+              <div>
+                <a href="{% url 'update-room' room.id %}" class="px-2 text-danger"><span title="Edit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                  <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                </svg></span></a>
+                <a href="{% url 'delete-room' room.id %}" class="px-2 text-danger"><span title="Delete">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                  </svg>
+                </span>
+                </a>
+              </div>
+              {% endif %}
             </div>
                 <div class="card-body d-flex justify-content-between">
                   <div>
                   <small>Title</small>
-                  <h5 class="card-title">{{room.name}}</h5>
+                  <h3 class="card-title">{{room.name}}</h3>
                   <p style="margin-top: -5px;font-size: x-small;">HOSTED BY </p>
                   <div style="margin-top: -20px; margin-bottom: 15px;">
-                    <img src="" alt="" style="border: 1px solid black;width: 20px;height: 20px;border-radius: 50%;">
+                    <img src="{{room.host.avator.url}}" alt="" style="border: 1px solid black;width: 20px;height: 20px;border-radius: 50%;">
                   <a style="font-size: small; text-decoration: none;" href="{% url 'profile' room.host.id %}">@{{room.host}}</a>
                   </div>
                   <small >Description</small>
@@ -52,7 +69,7 @@
                     <div class="common d-flex justify-content-between">
                       <div class="left">
                         <small>
-                          <img class="recent-img" src="" alt="" style="border-color: whitesmoke;">
+                          <img class="recent-img" src="{{message.user.avator.url}}" alt="" style="border-color: whitesmoke;">
                           @{{message.user}} &nbsp;&nbsp;&nbsp;
                           {% if request.user == message.user %}
                         <a href="{% url 'delete-message' message.id %}" style="color: whitesmoke;">
@@ -105,7 +122,7 @@
         
         <div class="d-flex my-3">
           <!-- <div class="align-self-center"> -->
-        <img class="room-img mx-3" src="" alt="">
+        <img class="room-img mx-3" src="{{user.avator.url}}" alt="">
       <!-- </div> -->                             
       <div class="d-flex flex-column">
         <h6>{{user.username|title}}</h6>

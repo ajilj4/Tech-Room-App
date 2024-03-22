@@ -1,13 +1,13 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Room,Topic, Message
-from .forms import Roomform,Userform
+from .models import Room,Topic, Message,User
+from .forms import Roomform,Userform, MyUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 
 def loginpage(request):
     page = "login"
@@ -39,10 +39,10 @@ def logoutpage(request):
 
 def registerpage(request):
     page = "register"
-    form= UserCreationForm()
+    form= MyUserCreationForm()
 
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -110,7 +110,7 @@ def createRoom(request):
     topic= Topic.objects.all()
     if request.method == "POST":
         topic = request.POST.get('topic')
-        topic,create = Topic.objects.get_or_create(name=topic_name)
+        topic,created = Topic.objects.get_or_create(name=topic)
         Room.objects.create(
             host=request.user,
             topic=topic,
@@ -182,7 +182,7 @@ def updateUser(request):
 
     form = Userform(instance=user)
     if request.method == 'POST':
-        form = Userform(request.POST,instance=user)
+        form = Userform(request.POST,request.FILES,instance=user)
         if form.is_valid():
             form.save()
         return redirect('profile',pk=user.id)

@@ -1,21 +1,31 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
+
+<style>
+  .left:hover,.right:hover{
+    filter: drop-shadow(0 0 5px #0dcaf0);
+  }
+  .left{
+    position: sticky;
+    top: 20px;
+  }
+</style>
 
 <div class="container-fluid " style="min-height: 100vh;">
     <div class="row">
-      <div class="col">
+      <div class="col ">
         <div class="left">
             {% include 'baseapp/topicComponent.html' %}
            
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6 ">
         <div class="center">
             {% include 'baseapp/roomComponent.html' %}
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 ">
         <div class="right">
             {% include 'baseapp/recentComponent.html' %}
             

@@ -1,5 +1,49 @@
+{% load static %}
+
 <style>
 
+.profilepic img{
+    width: 100px;
+    height: 100px;
+    
+    border-radius: 50%;
+   
+
+}
+
+
+
+.comnprofile h5 {
+    padding: 10px
+}
+
+.comnprofile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+.socialmedias{
+   position: fixed;
+   bottom: 0;
+  width: 100%;
+  background-color: white;
+}
+.socialmedias a i{
+   margin: 35px;
+}
+.slidenav:hover{
+   width: 100%;
+   background-color: antiquewhite;
+}
+
+.aligntextnav{
+   width: 100%;
+   height: calc(950px - 400px);
+}
 </style>
 
 
@@ -10,57 +54,90 @@
   <a class="navbar-brand " href="/">LOGO</a>
   <div class="d-flex flex-row ">
     {% if request.user.is_authenticated %}
+    <a href="{% url 'profile' request.user.id%}">
     <img
-      src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg"
+      src="{{request.user.avator.url}}"
+      alt="" style="object-fit: cover;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+     
+      border: 2px solid rgb(255, 255, 255) ;"></a>&nbsp;
+    <h5 class="my-2 align-self-center text-dark" >Hello, {{request.user.name|truncatechars:5}}</h5>
+  
+    {% else %}
+    <img
+      src="{% static 'images/avator.jpg' %}"
       alt="" style="object-fit: cover;
       width: 40px;
       height: 40px;
       border-radius: 50%;
       border: 1px solid white ;">&nbsp;
-    <h5 class="my-2 align-self-center text-dark" >Hello, {{request.user}}</h5>
-
-    {% else %}
     <h5 class="p-2">Guest</h5>
     {% endif %}
   </div>
-  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-    aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-
+  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white;">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">logo</h5>
+    <div class="offcanvas-header" style="background-color: lemonchiffon;">
+      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">        <img src="https://dragonflywellbeing.co.uk/wp-content/uploads/2021/02/Dragonfly-Wellbeing-Logo.png" alt="logo" width="130">
+      </h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+     
     </div>
-    <div class="offcanvas-body">
-      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        {% if request.user.is_authenticated %}
+    <div class="offcanvas-body" style="background-color: lavenderblush;">
+      <div class="navbar-nav flex-grow-1 justify-content-end pe-3">
+        <div class='comnprofile'>
+    {% if request.user.is_authenticated %}
 
-        <li><a href="{% url 'loginpage'%}">Logout</a></li>
+                    <div class='profilepic'>
+                      <img  src="{{request.user.avator.url}}" alt="">
+                    </div>
+                    <h5>{{request.user}}</h5>
+    {% else %}
+    <div class='profilepic'>
+      <img  src="{% static 'images/avator.jpg' %}" alt="">
+    </div>
+    <h5>{{request.user}}</h5>
+    {% endif %}
+        </div><hr>
+       
+        <div className='slidenav'>
+     
+      <div class="nav flex-column">
+        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="https://ajil-profolio.netlify.app/#contact" target="_blank">Contact</a>
+        <a class="nav-link" href="https://ajil-profolio.netlify.app/#resume" target="_blank">About Us</a>
+        <a class="nav-link" href="https://ajil-profolio.netlify.app/" target="_blank">Issue</a>
+        <a class="nav-link" href="https://ajil-profolio.netlify.app/#contact" target="_blank">Help</a>
+      </div>
+        </div>
+ {% if request.user.is_authenticated %}
+
+        <a class="btn btn-danger" href="{% url 'logoutpage'%}">Logout</a>
         {% else %}
-        <li><a href="{% url 'logoutpage'%}">Login</a></li>
+        <a class="btn btn-success" href="{% url 'loginpage'%}">Login</a>
         {% endif %}
-
-
-
-
-      </ul>
-      <form class="d-flex mt-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      
+      <div class="socialmedias">
+        <hr>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
     </div>
   </div>
+       
+
+
+
+
+     
   </div>
+    </div>
 </nav>
 <!-- <a href="/"><h1>logo</h1></a>
 <form method="GET" action="{% url 'home' %}">
