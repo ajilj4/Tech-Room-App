@@ -47,7 +47,7 @@ def registerpage(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            return redirect('home')
+            return redirect('loginpage')
         else:
             messages.error(request,"an error acqure")
 
