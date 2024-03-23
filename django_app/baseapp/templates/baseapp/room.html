@@ -7,10 +7,10 @@
     <div class="row">
       <div class="col-lg-8" >
         <div class="left">
-            <div class="card my-4" style="height: 86.5vh;">
+            <div class="card my-4" style="height: auto;">
                 <div class="card-header d-flex flex-row justify-content-between">
                   <div>
-                <a href="{{request.META.HTTP_REFERER}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <a href="{% url 'home' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                 </svg></a>&nbsp;
                 <h6 style="display: inline;" class="ms-3">STUDY ROOM</h6>
@@ -40,28 +40,31 @@
                     <img src="{{room.host.avator.url}}" alt="" style="border: 1px solid black;width: 20px;height: 20px;border-radius: 50%;">
                   <a style="font-size: small; text-decoration: none;" href="{% url 'profile' room.host.id %}">@{{room.host}}</a>
                   </div>
-                  <small >Description</small>
-                  {% if room.description %}
-                  <h6 class="card-text mt-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{room.description}}</h6>
-                  {% else %}
                  
-                  <h6 class="card-text "><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    ------  empty  ------
-
-                  </h6>
-                  {% endif %}
                 </div>
                 <div>
                   <p style="font-size: small;">{{room.created|timesince}} ago</p>
                 </div>
                 </div>
-                <small class="mt-5 mx-3 text-light px-3 mb-1 rounded-pill" style="background-color: #585757; width: fit-content;">{{room.topic.name}}</small>
+                <div class="mx-3">
+                <small >Description</small>
+                {% if room.description %}
+                <h6 class="card-text mt-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{room.description}}</h6>
+                {% else %}
+               
+                <h6 class="card-text "><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  ------  empty  ------
 
-                <div class="card mx-3  mb-3 text-bg-dark" style="height: 50vh;position: relative; ">
+                </h6>
+                {% endif %}
+              </div>
+                <small class="mt-3 mx-3 text-light px-3 mb-1 rounded-pill" style="background-color: #585757; width: fit-content;">{{room.topic.name}}</small>
+
+                <div class="card m-1  text-bg-dark" style="height: 60vh;position: relative; ">
                   <div class="card-header">
                     <h5>Message Room</h5>
                   </div>
-                    <div class="card-body" style="overflow: scroll;">
+                    <div class="card-body" style="overflow: scroll;font-size: smaller;">
                     {% for message in room_messages %}
                     <div class="border-start border-danger mx-2 px-3 " >
                       
@@ -112,12 +115,12 @@
       </div>
       <div class="col">
         <div class="center">
-          <div class="card my-4">
-          <div class="card-header px-4 d-flex ">
+          <div class="card my-4" ">
+          <div class="card-header px-4 d-flex justify-content-between">
             <h5 class="me-2">Participation </h5>
             <i>{{room.participants.all.count}} Joined </i>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="max-height: 89vh; overflow: scroll;">
         {% for user in participants %}
         
         <div class="d-flex my-3">

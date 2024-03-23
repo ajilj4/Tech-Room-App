@@ -9,9 +9,15 @@
 
 <div>
   {% if page != 'profile' %}
+<div class="d-flex justify-content-between mx-3">
+  <button class="btn btn-outline-light my-3 py-2 rounded-pill" id="toggleButtontopic" style="width: 145px;">Browse Topic</button>
+  <button class="btn btn-outline-light my-3 rounded-pill" id="toggleButtonrecent" style="width: 145px;">Recent Activity</button>
+</div>
+
+
     <form method="GET" action="{% url 'home' %}" class="d-flex " >
       {% csrf_token %}
-        <input class="form-control me-2 rounded-start-pill rounded-end-pill my-3"" type="text" placeholder="Search" aria-label="Search" name="q">
+        <input class="form-control mx-2 rounded-start-pill rounded-end-pill my-3"" type="text" placeholder="Search" aria-label="Search" name="q">
         <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
       </form>
       {% endif %}

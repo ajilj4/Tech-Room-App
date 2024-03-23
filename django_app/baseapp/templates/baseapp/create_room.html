@@ -3,8 +3,8 @@
 {% block content %}
 
 <div style="height: 100vh;position: relative;">
-    <div class="container-sm">
-    <div class="card " style="height: auto;position: absolute;top: 43%;left: 50%;transform: translate(-50%,-50%);">
+    <div class="container">
+    <div class="card" style="height: auto;position: absolute;top: 43%;left: 50%;transform: translate(-50%,-50%);">
         <h5 class="card-header">
             <a href="{{request.META.HTTP_REFERER}}" class="pe-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -16,7 +16,7 @@
           Update room
           {% endif %}
         </h5>
-        <div class="card-body px-4 py-4">
+        <div class="card-body px-3 py-4">
           {% include 'message.html' %}
             <form method="POST" action="">
                 {% csrf_token %}
