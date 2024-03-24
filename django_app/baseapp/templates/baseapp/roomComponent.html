@@ -10,8 +10,8 @@
 <div>
   {% if page != 'profile' %}
 <div class="d-flex justify-content-between mx-3">
-  <button class="btn btn-outline-light my-3 py-2 rounded-pill" id="toggleButtontopic" style="width: 145px;">Browse Topic</button>
-  <button class="btn btn-outline-light my-3 rounded-pill" id="toggleButtonrecent" style="width: 145px;">Recent Activity</button>
+  <a class="btn btn-outline-light mt-4 mb-1 py-2 rounded-pill" id="toggleButtontopic" href="{% url 'topic'%}" style="width: 145px;">Browse Topic</a>
+  <a class="btn btn-outline-light mt-4 mb-1 py-2 rounded-pill" id="toggleButtonrecent" href="{% url 'recent'%} " style="width: 145px;">Recent Activity</a>
 </div>
 
 

@@ -194,5 +194,9 @@ def topic(request) :
     topic = Topic.objects.filter(Q(name__icontains=q))
     return render(request,'baseapp/topic.html',{'topic':topic})
 
+def recent(request):
+    recent_msg = Message.objects.all()
+    return render(request,'baseapp/recentpage.html',{'recent_msg':recent_msg})
+
     
 # Create your views here.
