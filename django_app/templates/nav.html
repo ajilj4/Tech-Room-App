@@ -49,9 +49,9 @@
 
 
 
-<nav class="navbar bg-info text-dark border-bottom border-body p-3">
+<nav class="navbar bg-info text-dark border-bottom border-body p-2">
     <div class=" container-fluid">
-  <a class="navbar-brand " href="/">LOGO</a>
+  <a class="navbar-brand " href="/"><img src="{% static 'images/roomlogo.png' %}" alt="logo" width="140"></a>
   <div class="d-flex flex-row ">
     {% if request.user.is_authenticated %}
     <a href="{% url 'profile' request.user.id%}">
@@ -82,7 +82,7 @@
   
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header" style="background-color: lemonchiffon;">
-      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">        <img src="https://dragonflywellbeing.co.uk/wp-content/uploads/2021/02/Dragonfly-Wellbeing-Logo.png" alt="logo" width="130">
+      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">        <img src="{% static 'images/roomlogo.png' %}" alt="logo" width="130">
       </h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
      
