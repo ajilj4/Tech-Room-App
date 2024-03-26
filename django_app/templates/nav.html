@@ -52,9 +52,11 @@
 <nav class="navbar bg-info text-dark border-bottom border-body p-2">
     <div class=" container-fluid">
   <a class="navbar-brand " href="/"><img src="{% static 'images/roomlogo.png' %}" alt="logo" width="140"></a>
-  <div class="d-flex flex-row ">
+  <div style="display: none;" id="navprofile">
+    <div class="d-flex flex-row " >
     {% if request.user.is_authenticated %}
-    <a href="{% url 'profile' request.user.id%}">
+    
+    <a href="{% url 'profile' request.user.id%}"  >
     <img
       src="{{request.user.avator.url}}"
       alt="" style="object-fit: cover;
@@ -76,6 +78,7 @@
     <h5 class="p-2">Guest</h5>
     {% endif %}
   </div>
+</div>
   <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white;">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -130,16 +133,8 @@
       </div>
     </div>
   </div>
-       
-
-
-
 
      
   </div>
     </div>
 </nav>
-<!-- <a href="/"><h1>logo</h1></a>
-<form method="GET" action="{% url 'home' %}">
-    <input type="text" placeholder="search ..." name="q"/>
-</form> -->
