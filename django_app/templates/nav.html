@@ -96,9 +96,10 @@
     {% if request.user.is_authenticated %}
 
                     <div class='profilepic'>
-                      <img  src="{{request.user.avator.url}}" alt="">
+                      <a href="/update-user"><img  src="{{request.user.avator.url}}" alt=""></a>
                     </div>
-                    <h5>{{request.user}}</h5>
+                    <h5>{{request.user.name}}</h5>
+                    <a href="/profile/{{request.user.id}}"><small style="margin-top: -20px;">@{{request.user.username}}</small></a>
     {% else %}
     <div class='profilepic'>
       <img  src="{% static 'images/avator.jpg' %}" alt="">
