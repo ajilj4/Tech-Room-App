@@ -37,16 +37,9 @@
       $('#toggleButtonrecent').hide();
       $('#tcard').show();
       $('#rcard').show();
-      $('#cardRow').children().each(function() {
-        $(this).appendTo('#cardRow');
-      });
-      $('.card:second').show();
+     
     } else {
-      $('#cardRow').children().each(function(index) {
-        if (index === 2) {
-          $(this).prependTo('#cardRow');
-        }
-      });
+      
       $('#toggleButtontopic').show();
       $('#toggleButtonrecent').show();
       $('#tcard').hide();
