@@ -59,7 +59,7 @@
     <a href="{% url 'profile' request.user.id%}"  >
     <img
       src="{{request.user.avator.url}}"
-      alt="" style="object-fit: cover;
+      alt="profile" style="object-fit: cover;
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -70,7 +70,7 @@
     {% else %}
     <img
       src="{% static 'images/avator.jpg' %}"
-      alt="" style="object-fit: cover;
+      alt="profile" style="object-fit: cover;
       width: 40px;
       height: 40px;
       border-radius: 50%;
