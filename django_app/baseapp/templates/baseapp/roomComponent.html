@@ -105,5 +105,29 @@
           </div>
 
         {% endfor %}
+       
+      
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if room.has_previous %}
+          <li class="page-item ">
+            
+            <a class="page-link" href="?page={{ room.previous_page_number }}">Previous</a>
+          </li>
+         
+          {% endif %}
+          {% for page_number in room.paginator.page_range %}
+                <li class="page-item ">
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+            {% endfor %}
+          
+          <li class="page-item">
+            {% if room.has_next %}
+            <a class="page-link" href="?page={{ room.next_page_number }}">Next</a>
+            {% endif %}
+          </li>
+        </ul>
+      </nav>
     </div>
 </div>

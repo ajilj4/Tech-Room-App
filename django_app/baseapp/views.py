@@ -8,6 +8,8 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 # from django.contrib.auth.forms import UserCreationForm
+from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def loginpage(request):
     page = "login"
@@ -55,23 +57,41 @@ def registerpage(request):
     return render(request,'baseapp/login_register.html',context)
 
 def home(request):
-
-    if request.GET.get('q') != None :
-        q = request.GET.get("q")
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
     else:
-        q=''
-    # q= request.GET.get('q') if request.GET.get('q') != None else ""
-    room = Room.objects.filter(
-        Q(topic__name__icontains=q)|
-        Q(name__icontains=q)|
-        Q(description__icontains=q)
+        q = ''
 
-        )
-    topic= Topic.objects.all()
+    room_list = Room.objects.filter(
+        Q(topic__name__icontains=q) |
+        Q(name__icontains=q) |
+        Q(description__icontains=q)
+    )
+
+    paginator = Paginator(room_list, 10)
+    page = request.GET.get('page')
+
+    try:
+        room = paginator.page(page)
+    except PageNotAnInteger:
+        room = paginator.page(1)
+    except EmptyPage:
+        room = paginator.page(paginator.num_pages)
+
+    topic = Topic.objects.all()
     recent_msg = Message.objects.filter(Q(room__topic__name__icontains=q)).order_by("-id")[:4]
-    room_count = room.count()
-    context ={'room':room,'topic':topic,'q':q,'room_count':room_count,"recent_msg":recent_msg }
-    return render(request,'baseapp/home.html',context)
+
+    room_count = room_list.count()  # Count the number of items in the queryset
+
+    context = {
+        'room': room,
+        'topic': topic,
+        'q': q,
+        'room_count': room_count,
+        'recent_msg': recent_msg,
+    }
+
+    return render(request, 'baseapp/home.html', context)
 
 def room(request,pk):
     page = 'room'
