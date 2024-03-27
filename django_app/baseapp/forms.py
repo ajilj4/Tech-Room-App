@@ -26,8 +26,8 @@ class Roomform(ModelForm):
 
 
 class Userform(ModelForm):
-
-    # avator = forms.FileField(label='Avator', widget=forms.FileInput(attrs={'class': 'form-control'}))
+    
+    # avator = forms.FileField(label='avator', widget=forms.FileInput(attrs={'class': 'form-control'}))
     name = forms.CharField(label='Name', widget=forms.TextInput(attrs={'class': 'form-control'}),min_length=1)
     username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}),min_length=1)
     email = forms.EmailField(label='Email', widget=forms.TextInput(attrs={'class': 'form-control'}),min_length=1)

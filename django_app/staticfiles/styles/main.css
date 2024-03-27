@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    /* color: white; */
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  z-index: -10;
+}
+/* .box{
+  background-color: rgb(83, 63, 38);
+ 
+} */
+.room-img{
+  object-fit: cover;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-right: 6px;
+}
+.recent-img{
+  object-fit: cover;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-right: 5px;
+}
+/* 
+.homebg{
+  background-color: bisque;
+  background-image: url('../images/logo.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 100%; */
+  /* background-image: url("https://img.freepik.com/premium-photo/interior-classroom-night-scary-atmosphere_103577-7769.jpg"); */
+/* } */

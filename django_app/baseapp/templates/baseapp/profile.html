@@ -28,22 +28,34 @@
 
 </div>  
 <div style="text-align: center;">
-    <h4 class="m-3">{{user}}</h4>
+    <p  class="mt-3 fs-3">{{user.name}}</p>
+    <p style="margin-top: -20px;">@{{user.username}}</p>
+
     {% if request.user == user %}
     <a href="{% url 'update-user' %}" class=" btn rounded-pill btn-outline-light px-4">Edit</a>
     {% endif %}
 </div>
+{% if user.bio %}
+<div class="p-2">
+    <h6><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-opencollective" viewBox="0 0 16 16">
+        <path fill-opacity=".4" d="M12.995 8.195c0 .937-.312 1.912-.78 2.693l1.99 1.99c.976-1.327 1.6-2.966 1.6-4.683 0-1.795-.624-3.434-1.561-4.76l-2.068 2.028c.468.781.78 1.679.78 2.732z"/>
+        <path d="M8 13.151a4.995 4.995 0 1 1 0-9.99c1.015 0 1.951.273 2.732.82l1.95-2.03a7.805 7.805 0 1 0 .04 12.449l-1.951-2.03a5.07 5.07 0 0 1-2.732.781z"/>
+      </svg>&nbsp;&nbsp; Bio</h6>
+    <i><small>{{user.bio}}</small></i>
+</div>
+{% endif %}
 <div style="height: 55vh;overflow-y: scroll;margin-top: 2%;">
         {% include 'baseapp/roomComponent.html' %}
     </div>
         </div>
         <div class=" col-md-4">.
-            <div class="card my-4 mx-2" style="height: 85vh;overflow:scroll ;">
+            <div class="card my-4 mx-2" style="max-height: 85vh;overflow:scroll ;">
         
                 <div class="card-header text-center bg-info-subtle">
                     <h4 class="card-title text-dark ">Recent activity</h4>
                 </div>
                 <div class="card-body px-3">
+                    {% if recent_msg %}
                     {% for msg in recent_msg %}
                     <div class="toast-header d-flex justify-content-between">
                         <div>
@@ -59,7 +71,9 @@
                     <p style="font-size: smaller;" class="text-end text-bg-secondary px-4 py-2 mx-2 rounded-start-pill rounded-end-pill fw-lighter font-monospace" ><i>{{msg.body|truncatechars:70}}</i></p>
                 <hr>
                         {% endfor %}
-                      
+                        {% else %}
+                        <h6 class="text-center py-4">inactive</h6>
+                      {% endif %}
                 </div>  
                   
                   

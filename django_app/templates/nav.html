@@ -8,7 +8,7 @@
     object-fit: cover;
     border-radius: 50%;
    
-
+border: 2px solid black;
 }
 
 
@@ -59,7 +59,7 @@
     <a href="{% url 'profile' request.user.id%}"  >
     <img
       src="{{request.user.avator.url}}"
-      alt="profile" style="object-fit: cover;
+      alt="" style="object-fit: cover;
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -96,7 +96,7 @@
     {% if request.user.is_authenticated %}
 
                     <div class='profilepic'>
-                      <a href="/update-user"><img  src="{{request.user.avator.url}}" alt=""></a>
+                      <a href="/update-user"><img  src="{{request.user.avator.url}}" alt="" ></a>
                     </div>
                     <h5>{{request.user.name}}</h5>
                     <a href="/profile/{{request.user.id}}"><small style="margin-top: -20px;">@{{request.user.username}}</small></a>
@@ -111,7 +111,7 @@
         <div className='slidenav'>
      
       <div class="nav flex-column">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="/">Home</a>
         <a class="nav-link" href="https://ajil-profolio.netlify.app/#contact" target="_blank">Contact</a>
         <a class="nav-link" href="https://ajil-profolio.netlify.app/#resume" target="_blank">About Us</a>
         <a class="nav-link" href="https://ajil-profolio.netlify.app/" target="_blank">Issue</a>

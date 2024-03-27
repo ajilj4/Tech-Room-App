@@ -61,14 +61,14 @@ def home(request):
         q = request.GET['q']
     else:
         q = ''
-
+    
     room_list = Room.objects.filter(
         Q(topic__name__icontains=q) |
         Q(name__icontains=q) |
         Q(description__icontains=q)
     )
 
-    paginator = Paginator(room_list, 10)
+    paginator = Paginator(room_list, 6)
     page = request.GET.get('page')
 
     try:
@@ -78,7 +78,7 @@ def home(request):
     except EmptyPage:
         room = paginator.page(paginator.num_pages)
 
-    topic = Topic.objects.all()
+    topic = Topic.objects.all()[:13]
     recent_msg = Message.objects.filter(Q(room__topic__name__icontains=q)).order_by("-id")[:4]
 
     room_count = room_list.count()  # Count the number of items in the queryset
@@ -89,6 +89,7 @@ def home(request):
         'q': q,
         'room_count': room_count,
         'recent_msg': recent_msg,
+        
     }
 
     return render(request, 'baseapp/home.html', context)
