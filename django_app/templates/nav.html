@@ -55,7 +55,7 @@ border: 2px solid black;
   <div style="display: none;" id="navprofile">
     <div class="d-flex flex-row " >
     {% if request.user.is_authenticated %}
-    
+    {% if request.user.avator.url != " "  %}
     <a href="{% url 'profile' request.user.id%}"  >
     <img
       src="{{request.user.avator.url}}"
@@ -64,7 +64,9 @@ border: 2px solid black;
       height: 40px;
       border-radius: 50%;
      
-      border: 2px solid rgb(255, 255, 255) ;"></a>&nbsp;
+      border: 2px solid rgb(255, 255, 255) ;"></a>
+      {% endif %}
+      &nbsp;
     <h5 class="my-2 align-self-center text-dark" >Hello, {{request.user.name|truncatechars:5}}</h5>
   
     {% else %}
@@ -96,7 +98,9 @@ border: 2px solid black;
     {% if request.user.is_authenticated %}
 
                     <div class='profilepic'>
+                      {% if request.user.avator.url != '' %}
                       <a href="/update-user"><img  src="{{request.user.avator.url}}" alt="" ></a>
+                    {% endif %}
                     </div>
                     <h5>{{request.user.name}}</h5>
                     <a href="/profile/{{request.user.id}}"><small style="margin-top: -20px;">@{{request.user.username}}</small></a>
