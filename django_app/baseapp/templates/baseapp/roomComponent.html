@@ -22,9 +22,10 @@
       </form>
       {% endif %}
 </form> 
+
 <div class="mx-2 my-2 bs-secondary-color" >
     <div class="d-flex justify-content-between">
-        <div style="display: flex;flex-direction: column;">
+        <div style="display: flex; flex-direction: column;">
             <h4>ROOMS</h4>
             {% if page != 'profile' %}
             <small style="margin-top: -8px;">Total room : {{room_count}}</small>
@@ -44,7 +45,7 @@
     </div>
         <br>
        
-        
+        {% if room%}
         {% for i in room %}
         
         
@@ -107,8 +108,13 @@
           </div>
 
         {% endfor %}
+        {% else %}
+         <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+    <h5 class="text-muted">No Room Found</h5>
+  </div>
+{% endif %}
        
-      
+      {% if room %}
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           {% if room.has_previous %}
@@ -131,5 +137,6 @@
           </li>
         </ul>
       </nav>
+      {% endif %}
     </div>
 </div>

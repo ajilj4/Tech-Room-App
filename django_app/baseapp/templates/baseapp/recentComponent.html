@@ -1,7 +1,8 @@
 {% load static%}
 <div>
     
-    <div class="card my-4 mx-2" id="rcard" >
+    <div class="card my-4 mx-2" id="rcard" style="min-height: 400px;
+">
         
         <div class="card-header text-center bg-info-subtle">
             <h4 class="card-title text-dark ">Recent activity</h4>
@@ -11,9 +12,9 @@
             <div class="toast-header d-flex justify-content-between">
                 <div>
                     {% if msg.user.avator.url != " "  %}
-                <img src="{{msg.user.avator.url}}" class="recent-img" alt="..." >
+                <img src="{{msg.user.avator.url}}" class="recent-img" alt="" >
                 {% else %}
-                <img src="{% static 'images/avator.jpg'%}" class="recent-img" alt="..." >
+                <img src="{% static 'images/avator.jpg'%}" class="recent-img" alt="" >
 {% endif %}
                 <strong class="me-auto">@{{msg.user}}</strong>
             </div>

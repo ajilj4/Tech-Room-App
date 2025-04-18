@@ -15,14 +15,26 @@
           <input class="form-control" type="text" name="q" placeholder="search input" aria-label="default input example">
       </form>
       <div class="card-body " style="height: auto;overflow: scroll;">
-          {% for lang in topic %}
-          <div >
-              <a href="{% url 'home'%}?q={{lang.name}}" class="text-dark text-decoration-none d-flex justify-content-between px-3 link-primary">
-                  <h6 class="card-title ">{{lang|title}}</h6>
-                  <p>{{lang.room_set.all.count}}</p>
-              </a>
-          </div>
-          {% endfor %}
+        {% if topic %}
+        {% for lang in topic %}
+            <div>
+                <a href="{% url 'home'%}?q={{lang.name}}" class="text-dark text-decoration-none d-flex justify-content-between px-3 link-primary">
+                    <h6 class="card-title">{{lang|title}}</h6>
+                    <p>{{lang.room_set.all.count}}</p>
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-journals text-secondary mb-3" viewBox="0 0 16 16">
+                <path d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5z"/>
+                <path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z"/>
+            </svg>
+            <h5 class="text-secondary">No topics available</h5>
+            <p class="text-muted">No topics have been created yet or match your search.</p>
+        </div>
+    {% endif %}
+         
       </div>
   </div>
 </div>
